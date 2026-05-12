@@ -11,5 +11,6 @@ servlets/ActualizarEstadoPedido.class
 servlets/AdministrarResenias.class
 servlets/CargarProducto.class
 servlets/EliminarResenia.class
+servlets/Register.class
 servlets/BorrarProducto.class
 servlets/AgregarProducto.class
