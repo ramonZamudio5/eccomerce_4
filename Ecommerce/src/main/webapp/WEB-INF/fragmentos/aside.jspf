@@ -1,0 +1,6 @@
+<aside>
+    <a href="./Catalogo.jsp">Catalogo</a>
+    <a href="./Carrito.jsp">Carrito</a>
+    <a href="./Pedidos.jsp">Gestion de pedidos</a>
+    <a href="./Login.jsp">Iniciar Sesión</a>
+</aside>

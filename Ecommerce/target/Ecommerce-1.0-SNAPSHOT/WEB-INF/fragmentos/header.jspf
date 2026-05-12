@@ -1,0 +1,29 @@
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<header>
+    <div class="div">
+        <div class="logo">
+            <a href="${pageContext.request.contextPath}/Index.jsp">
+                <h1>Logo de la marca</h1>
+            </a>
+        </div>
+
+        <div class="usuario">
+            <c:choose>
+                <c:when test="${empty sessionScope.usuarioActual}">
+                    <a href="${pageContext.request.contextPath}/Login.jsp" class="btn-nav">Iniciar Sesión</a>
+                    <a href="${pageContext.request.contextPath}/Register.jsp" class="btn-nav">Registro</a>
+                </c:when>
+                <c:otherwise>
+                    <div class="perfil-header">
+                        <c:if test="${sessionScope.rol == 'ADMINISTRADOR'}">
+                            <a href="${pageContext.request.contextPath}/AdminPrincipal.jsp" style="margin-right: 15px;">Panel Admin</a>
+                        </c:if>                        
+                        <a href="${pageContext.request.contextPath}/logout" style="color: #ff4d4d; margin-left: 10px; text-decoration: none;">
+                            Cerrar sesión
+                        </a>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </div>
+</header>

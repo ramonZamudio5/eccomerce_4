@@ -1,0 +1,15 @@
+servlets/AdministrarReseniasProducto.class
+servlets/CargarPedidos.class
+servlets/AdministrarUsuarios.class
+com/mycompany/ecommerce/JakartaRestConfiguration.class
+servlets/EditarProducto.class
+com/mycompany/ecommerce/resources/JakartaEE10Resource.class
+servlets/Login.class
+filtros/FiltroAutorización.class
+servlets/Logout.class
+servlets/ActualizarEstadoPedido.class
+servlets/AdministrarResenias.class
+servlets/CargarProducto.class
+servlets/EliminarResenia.class
+servlets/BorrarProducto.class
+servlets/AgregarProducto.class
