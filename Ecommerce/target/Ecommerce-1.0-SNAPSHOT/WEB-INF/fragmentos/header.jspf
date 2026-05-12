@@ -3,7 +3,7 @@
     <div class="div">
         <div class="logo">
             <a href="${pageContext.request.contextPath}/Index.jsp">
-                <h1>Logo de la marca</h1>
+                <h1>TecShop</h1>
             </a>
         </div>
 
