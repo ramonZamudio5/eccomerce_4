@@ -74,40 +74,50 @@ public class Login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
 
         String correo = request.getParameter("correo");
         String contrasenia = request.getParameter("contrasenia");
 
         try {
             UsuarioDTO usuario = usuariosBO.iniciarSesion(correo, contrasenia);
-
             if (usuario == null) {
-                request.setAttribute("mensaje", "Correo o contraseña incorrectos");
-                request.getRequestDispatcher("Login.jsp").forward(request, response);
+                response.getWriter().write(
+                    "{"
+                    + "\"success\": false,"
+                    + "\"message\": \"Correo o contraseña incorrectos\""
+                    + "}"
+                );
                 return;
             }
-
             HttpSession session = request.getSession(true);
             session.setAttribute("usuarioActual", usuario);
-            session.setAttribute("rol", usuario.getRol().name()); 
-            String nombreRol = usuario.getRol().name();
+            session.setAttribute("rol", usuario.getRol().name());
+            String destino = "";
             if (usuario.getRol().name().equals("ADMINISTRADOR")) {
-                response.sendRedirect(request.getContextPath() + "/AdminPrincipal.jsp");
-                return;
+                destino = "AdminPrincipal.jsp";
             }
-
             if (usuario.getRol().name().equals("CLIENTE")) {
-                response.sendRedirect("./Index.jsp");
-                return;
+                destino = "Index.jsp";
             }
+            response.getWriter().write(
+                "{"
+                + "\"success\": true,"
+                + "\"redirect\": \"" + destino + "\""
+                + "}"
+            );
 
         } catch (Exception e) {
-            request.setAttribute("mensaje", "Ocurrió un error al iniciar sesión " + e.getMessage());
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
-        }
 
+            response.getWriter().write(
+                    "{"
+                    + "\"success\": false,"
+                    + "\"message\": \"Error al iniciar sesion\""
+                    + "}"
+                );
+        }
     }
 
     /**

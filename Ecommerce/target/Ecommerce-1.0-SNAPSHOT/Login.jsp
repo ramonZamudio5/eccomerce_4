@@ -25,7 +25,7 @@
             </div>
             <div class="login-wrapper">
                 <div class="login-box">
-                    <form class="form-login" action="login" method="POST"> 
+                    <form class="form-login" id="loginForm"> 
                         <% if(request.getAttribute("mensaje") != null) { %>
                             <p style="color: red; text-align: center;"><%= request.getAttribute("mensaje") %></p>
                         <% } %>
@@ -48,5 +48,6 @@
             </div>
         </main>
         <%@include  file="/WEB-INF/fragmentos/footer.jspf"%>
+        <script src="scripts/login.js"></script>
     </body> 
 </html>
