@@ -11,6 +11,7 @@ async function cargarProductos(){
         const contenedor = document.getElementById("tablaProductos");
         contenedor.innerHTML = productos.map(p => `
                                 <tr>
+                                    <td><img src="${ p.rutaImagen}"></td>
                                     <td><strong>${p.nombre}</strong></td>
                                     <td>$${p.precio}</td>
                                     <td class="celda-acciones">
@@ -62,6 +63,8 @@ async function resenhaProducto(){
         console.error("Error al obtener detalles del producto", error);
     }
 }
+
+
 document.addEventListener("DOMContentLoaded", () => {
     cargarProductos();
     detallesProducto();

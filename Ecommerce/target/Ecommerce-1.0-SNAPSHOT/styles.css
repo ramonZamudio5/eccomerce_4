@@ -256,6 +256,12 @@ footer {
     background-color: white;
 }
 
+.tabla-productos img{
+    max-width: 100%;
+    object-fit: contain;
+    
+}
+
 .tabla-productos th {
     background-color: #333; 
     color: white;
@@ -371,10 +377,11 @@ footer {
 }
 
 .img-producto {
-    width: 100%;
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
+    max-width: 100%;
+    object-fit: contain;
 }
 
 .contenedor-botones-resena {

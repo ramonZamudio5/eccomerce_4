@@ -25,6 +25,7 @@
                     <table class="tabla-productos">
                         <thead>
                             <tr>
+                                <th>Imagen</th>
                                 <th>Producto</th>
                                 <th>Precio</th>
                                 <th>Acciones</th>

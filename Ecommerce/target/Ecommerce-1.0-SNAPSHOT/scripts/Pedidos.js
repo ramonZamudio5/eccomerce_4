@@ -5,7 +5,7 @@
 
 async function cargarPedidosPorUsuario(){
     const parametro = new URLSearchParams(window.location.search);
-    const idProducto = parametro.get("id");
+    const idUsuario = parametro.get("id");
     try{
         
     }catch(error){
