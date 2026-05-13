@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import util.JWTUtil;
 
 /**
  *
@@ -22,7 +23,6 @@ import jakarta.servlet.http.HttpSession;
  */
 @WebServlet(name = "Login", urlPatterns = {"/login"})
 public class Login extends HttpServlet {
-
     IUsuariosBO usuariosBO = new UsuariosBO();
 
     /**
@@ -74,15 +74,18 @@ public class Login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
+
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
         String correo = request.getParameter("correo");
         String contrasenia = request.getParameter("contrasenia");
-
         try {
-            UsuarioDTO usuario = usuariosBO.iniciarSesion(correo, contrasenia);
+            UsuarioDTO usuario =
+                    usuariosBO.iniciarSesion(correo, contrasenia);
             if (usuario == null) {
                 response.getWriter().write(
                     "{"
@@ -93,30 +96,38 @@ public class Login extends HttpServlet {
                 return;
             }
             HttpSession session = request.getSession(true);
+
             session.setAttribute("usuarioActual", usuario);
             session.setAttribute("rol", usuario.getRol().name());
+
+            String token = JWTUtil.generarToken(
+                usuario.getCorreo(),
+                usuario.getRol().name()
+            );
+
             String destino = "";
-            if (usuario.getRol().name().equals("ADMINISTRADOR")) {
+            if(usuario.getRol().name().equals("ADMINISTRADOR")){
                 destino = "AdminPrincipal.jsp";
-            }
-            if (usuario.getRol().name().equals("CLIENTE")) {
+            } else if(usuario.getRol().name().equals("CLIENTE")){
+
                 destino = "Index.jsp";
             }
             response.getWriter().write(
                 "{"
                 + "\"success\": true,"
+                + "\"token\": \"" + token + "\","
+                + "\"rol\": \"" + usuario.getRol().name() + "\","
                 + "\"redirect\": \"" + destino + "\""
                 + "}"
             );
-
         } catch (Exception e) {
-
+            e.printStackTrace();
             response.getWriter().write(
-                    "{"
-                    + "\"success\": false,"
-                    + "\"message\": \"Error al iniciar sesion\""
-                    + "}"
-                );
+                "{"
+                + "\"success\": false,"
+                + "\"message\": \"Error al iniciar sesión\""
+                + "}"
+            );
         }
     }
 

@@ -48,6 +48,9 @@
             </div>
         </main>
         <%@include  file="/WEB-INF/fragmentos/footer.jspf"%>
+        <script>
+            const contextPath = "<%= request.getContextPath() %>";
+        </script>
         <script src="scripts/login.js"></script>
     </body> 
 </html>
