@@ -5,6 +5,7 @@
 package servlets;
 
 import bos.ProductoBO;
+import com.google.gson.Gson;
 import dtos.ProductoDTO;
 import exception.ObtenerProductosException;
 import interfaces.IProductosBO;
@@ -64,18 +65,33 @@ public class CargarProducto extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
         try {
-            String vista = request.getParameter("vista");
-            System.out.println("Vista: " + vista);
+//            String vista = request.getParameter("vista");
+//            System.out.println("Vista: " + vista);
+            String idString = request.getParameter("id");
+        if(idString != null){
+            Long id = Long.parseLong(idString);
+            ProductoDTO p = productosBO.obtenerProductoPorId(id);
+            String json = new Gson().toJson(p);
+            response.getWriter().write(json);
+        }else{
             List<ProductoDTO> productos = productosBO.obtenerProductos();
-            request.setAttribute("listaProductos", productos);
-
-            if ("adminProducto".equals(vista)) {
-                request.getRequestDispatcher("/AdminCatalogo.jsp").forward(request, response);
-            }
+//            request.setAttribute("listaProductos", productos);
+            String productosJson = new Gson().toJson(productos); // Conversion de objetos a json
+            response.getWriter().write(productosJson);
+        }
+//            if ("adminProducto".equals(vista)) {
+//                request.getRequestDispatcher("/AdminCatalogo.jsp").forward(request, response);
+//            }
+            
         } catch (ObtenerProductosException ex) {
-            request.setAttribute("mensaje", "Error: " + ex.getMessage());
-            request.getRequestDispatcher("/error.jsp").forward(request, response);
+//            request.setAttribute("mensaje", "Error: " + ex.getMessage());
+//            request.getRequestDispatcher("/error.jsp").forward(request, response);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().write("Error : " + ex.getMessage());
         }
     }
 

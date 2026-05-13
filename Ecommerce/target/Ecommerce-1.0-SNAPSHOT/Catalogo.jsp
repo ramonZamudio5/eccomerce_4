@@ -25,14 +25,14 @@
                     <table class="tabla-productos">
                         <thead>
                             <tr>
-                            <th>Producto</th>
-                            <th>Precio</th>
-                            <th>Acciones</th>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Smartphone X</strong></td>
+                        <tbody id="tablaProductos">
+<!--                        <tr>
+                               <td><strong>Smartphone X</strong></td> 
                                 <td>$899.00</td>
                                 <td class="celda-acciones">
                                     <div class="contenedor-botones">
@@ -74,14 +74,15 @@
                                         <a href="DetallesProducto.jsp" class="btn-estilo btn-detalles">Detalles</a>
                                         <a href="Carrito.jsp?id=104" class="btn-estilo btn-carrito">Añadir al carrito</a>
                                         <a href="CrearResenia.jsp" class="btn-estilo btn-resena">Reseña</a>
-                                    </div>
+                                   </div>
                                 </td>
-                            </tr>
+                            </tr>                   --> 
                         </tbody>
                         </table>
                 </div>
             </main>
         </div>
         <%@include  file="/WEB-INF/fragmentos/footer.jspf"%>
+        <script src="scripts/CarritoCompras.js"></script>
     </body>
 </html>

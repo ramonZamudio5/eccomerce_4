@@ -9,13 +9,31 @@ public class ManejadorConexiones {
     // Crea una instancia de EntityManagerFactory utilizando la unidad de persistencia definida en persistence.xml
     // Para que no se creen varias instancias de EntityManagerFactory, se declara como static final
     
-    private static final EntityManagerFactory emFactory =
-            Persistence.createEntityManagerFactory(
-                    "com.mycompany_ecommercePersistencia_jar_1.0-SNAPSHOTPU");
+
+// quite el final para fines de evitar multiples conexiones debido a los servlets (mirar clase AplicacionListener)    
+    private static EntityManagerFactory emFactory;
+//            Persistence.createEntityManagerFactory(
+//                    "com.mycompany_ecommercePersistencia_jar_1.0-SNAPSHOTPU");
 
     public static EntityManager getEntityManager() {
         return emFactory.createEntityManager();
     }
+    
+    //metodos para evitar multiples conexiones por los servlets
+    public static void Inicializar(){
+        if(emFactory == null){
+            emFactory = Persistence.createEntityManagerFactory(
+                    "com.mycompany_ecommercePersistencia_jar_1.0-SNAPSHOTPU");
+        }
+    }
+    
+    public static void cerrar(){
+        if(emFactory!= null && emFactory.isOpen()){
+            emFactory.close();
+                    
+        }
+    }
+        
 
     // MAIN PARA MAPEAR LAS TABLAS EN MYSQL
     public static void main(String[] args) {

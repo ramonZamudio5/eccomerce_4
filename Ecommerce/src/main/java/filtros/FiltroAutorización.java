@@ -35,7 +35,9 @@ public class FiltroAutorización implements Filter {
         "EditarProducto",       
         "borrarproducto",      
         "AdminCatalogo.jsp",  
-        "AdminEditarProducto.jsp" 
+        "AdminEditarProducto.jsp",
+        // servlets
+        "/cargarproduto"
     };
 
     String[] paginasAdmin = {

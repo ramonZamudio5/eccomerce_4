@@ -36,7 +36,7 @@ public class Producto implements Serializable {
     @Column(name = "stock", nullable = false)
     private Integer stock;
 
-    @Column(name = "descripcion", length = 100, nullable = false)
+    @Column(name = "descripcion", length = 250, nullable = false)
     private String descripcion;
 
     // Se cambió Disponibilidad de boolean a enum para manejar mejor el estado del producto, 
