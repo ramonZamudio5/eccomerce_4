@@ -20,7 +20,7 @@
 
         <main class="main-historial">
             <div class = "top-contenedor">
-                <a href="./index.html"><img src="./imgs/back.png" alt=""></a>
+                <a href="./Index.jsp"><img src="./imgs/back.png" alt=""></a>
                 <h1>Historial de pedidos</h1>
             </div>
 
@@ -61,7 +61,7 @@
                 </tbody>
             </table>
 
-            <a href="./index.html" class="btn-volver-inicio">Volver al Inicio</a>
+            <a href="./Index.jsp" class="btn-volver-inicio">Volver al Inicio</a>
         </main>
     </div>
 

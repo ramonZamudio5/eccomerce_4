@@ -15,12 +15,12 @@
     <body>
        <header>
             <div class = "login-register">
-                <a href="./index.html"><h1>Logo de la marca</h1></a>
+                <a href="./Index.jsp"><h1>Logo de la marca</h1></a>
             </div>
         </header>
         <main>
             <div class = "top-contenedor">
-                <a href="./index.html"><img src="./imgs/back.png" alt=""></a>
+                <a href="./Index.jsp"><img src="./imgs/back.png" alt=""></a>
                 <h1>Iniciar Sesión</h1>
             </div>
             <div class="login-wrapper">

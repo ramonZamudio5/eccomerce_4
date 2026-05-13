@@ -17,7 +17,7 @@ async function cargarProductos(){
                                         <div class="contenedor-botones">
                                             <a href="DetallesProducto.jsp?id=${p.id}" class="btn-estilo btn-detalles">Detalles</a>
                                             <a href="Carrito.jsp" class="btn-estilo btn-carrito">Añadir al carrito</a>
-                                            <a href="CrearResenia.jsp" class="btn-estilo btn-resena">Reseña </a>
+                                            <a href="CrearResenia.jsp?id=${p.id}" class="btn-estilo btn-resena">Reseña </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -28,7 +28,6 @@ async function cargarProductos(){
   
 }
 
- 
 async function detallesProducto(){
     const parametro = new URLSearchParams(window.location.search);
     const idProducto = parametro.get("id");
@@ -48,7 +47,23 @@ async function detallesProducto(){
         console.error("Error al obtener detalles del producto", error);
     }
 }
+async function resenhaProducto(){
+    const parametro = new URLSearchParams(window.location.search);
+    const idProducto = parametro.get("id");
+    if(!idProducto) return;
+    try{
+        const respuesta = await fetch(`cargarproducto?id=${idProducto}`);
+        const producto =  await respuesta.json();
+        document.getElementById("nombreProducto").innerText = producto.nombre;
+        document.getElementById("idImagen").src = producto.rutaImagen;
+        
+        
+    }catch(error){
+        console.error("Error al obtener detalles del producto", error);
+    }
+}
 document.addEventListener("DOMContentLoaded", () => {
     cargarProductos();
     detallesProducto();
+    resenhaProducto();
 });

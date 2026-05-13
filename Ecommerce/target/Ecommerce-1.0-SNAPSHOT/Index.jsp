@@ -21,6 +21,7 @@
                 <section>
                     <h2>Integrantes del equipo</h2>
                     <p>Ramón Zamudio - 251924</p>
+                    <p>Luis Manjarrez - 252724</p>
                 </section>
             </main>
         </div>

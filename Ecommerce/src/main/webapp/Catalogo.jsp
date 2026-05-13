@@ -53,30 +53,7 @@
                                     </div>
                                 </td>
                             </tr>
-
-                            <tr>
-                                <td><strong>Sony WH-1000XM5</strong></td>
-                                <td>$4,953.00</td>
-                                <td class="celda-acciones">
-                                    <div class="contenedor-botones">
-                                        <a href="DetallesProducto.jsp" class="btn-estilo btn-detalles">Detalles</a>
-                                        <a href="Carrito.jsp?id=103" class="btn-estilo btn-carrito">Añadir al carrito</a>
-                                        <a href="CrearResenia.jsp" class="btn-estilo btn-resena">Reseña</a>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td><strong>Monitor LG UltraWide 34"</strong></td>
-                                <td>$450.00</td>
-                                <td class="celda-acciones">
-                                    <div class="contenedor-botones">
-                                        <a href="DetallesProducto.jsp" class="btn-estilo btn-detalles">Detalles</a>
-                                        <a href="Carrito.jsp?id=104" class="btn-estilo btn-carrito">Añadir al carrito</a>
-                                        <a href="CrearResenia.jsp" class="btn-estilo btn-resena">Reseña</a>
-                                   </div>
-                                </td>
-                            </tr>                   --> 
+               --> 
                         </tbody>
                         </table>
                 </div>

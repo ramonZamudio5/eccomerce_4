@@ -20,7 +20,7 @@
 
         <main class="main-carrito">
             <div class = "top-contenedor">
-                <a href="./index.html"><img src="./imgs/back.png" alt=""></a>
+                <a href="./Index.jsp"><img src="./imgs/back.png" alt=""></a>
                 <h1>carrito de compras</h1>
             </div>
             <div class="carrito-grid">
@@ -76,7 +76,7 @@
                 <div class="carrito-resumen-box">
                     <h3>Total</h3>
                     <div class="total-input">$5,345.00</div>
-                    <a href="./procesoPago.html" class="btn-pago">Proceder al pago</a>                
+                    <a href="./ProcesoPago.jsp" class="btn-pago">Proceder al pago</a>                
                 </div>
 
             </div>

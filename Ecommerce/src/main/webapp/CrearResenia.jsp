@@ -16,17 +16,17 @@
          <%@include  file="/WEB-INF/fragmentos/header.jspf"%>
         <main>
             <div class = "top-contenedor">
-                <a href="./catalogo.html"><img src="./imgs/back.png" alt=""></a>
+                <a href="./Catalogo.jsp"><img src="./imgs/back.png" alt=""></a>
             </div>
             <div class="contenido-grid">
                 <section class="seccion-producto">
-                    <img src="./imgs/sonywh5.jpeg" alt="Producto" class="img-producto">
+                    <img src="" alt="Producto" class="img-producto" id="idImagen">
                     <div class="puntuacion-actual">
                         ⭐⭐⭐⭐ 4 
                     </div>
                 </section>
                 <section class="seccion-form">
-                    <h1>Audifonos Sony wh10000-xm5</h1>
+                    <h1 id="nombreProducto"></h1>
                     <form>
                         <div class="campo-puntuacion">
                             <label>Calificacion:</label>
@@ -51,5 +51,6 @@
             </div>
         </main>
         <%@include  file="/WEB-INF/fragmentos/footer.jspf"%>
+        <script src="scripts/CarritoCompras.js"></script>
     </body>
 </html>

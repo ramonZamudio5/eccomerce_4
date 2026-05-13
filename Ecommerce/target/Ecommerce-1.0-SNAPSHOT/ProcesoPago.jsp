@@ -20,7 +20,7 @@
 
         <main class="main-pago">
             <div class="btn-back-container">
-                <a href="./carrito.html" class="btn-back">&#8592;</a>
+                <a href="./Carrito.jsp" class="btn-back">&#8592;</a>
             </div>
 
             <div class="envio-info-container">
@@ -94,7 +94,7 @@
                     <div class="total-pago-box">
                         <h3>Total</h3>
                         <div class="total-input">$5,345</div>
-                        <a href="./pagoConfirmado.html">Confirmar Pago</a>
+                        <a href="./PagoConfirmado.jsp">Confirmar Pago</a>
                     </div>
 
                 </div>

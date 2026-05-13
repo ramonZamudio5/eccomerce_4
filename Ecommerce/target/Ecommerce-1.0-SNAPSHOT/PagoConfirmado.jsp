@@ -21,7 +21,7 @@
         <main class="main-confirmacion">
             
             <div class = "top-contenedor">
-                <a href="./index.html"><img src="./imgs/back.png" alt=""></a>
+                <a href="./Index.jsp"><img src="./imgs/back.png" alt=""></a>
                 <h1>Compra Realizada Con exito!</h1>
             </div>
 
@@ -70,7 +70,7 @@
             </div>
 
             <div class="contenedor-btn-centro">
-                <a href="./index.html" class="btn-regresar-inicio">Regresar al Inicio</a>
+                <a href="./Index.jsp" class="btn-regresar-inicio">Regresar al Inicio</a>
             </div>
 
         </main>
