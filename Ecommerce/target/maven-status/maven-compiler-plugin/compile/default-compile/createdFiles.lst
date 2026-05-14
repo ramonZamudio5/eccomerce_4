@@ -16,6 +16,7 @@ servlets/EditarPerfilServlet.class
 servlets/ConsultarPedidoServlet.class
 servlets/Register.class
 servlets/BorrarProducto.class
+servlets/CrearReseniaServlet.class
 util/JWTUtil.class
 servlets/AgregarProducto.class
 filtros/JWTFilter.class

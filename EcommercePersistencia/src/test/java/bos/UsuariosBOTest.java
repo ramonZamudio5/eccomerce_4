@@ -6,6 +6,7 @@ package bos;
 
 import dtos.RolUsuarioDTO;
 import dtos.UsuarioDTO;
+import implementaciones.ManejadorConexiones;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -54,11 +55,12 @@ public class UsuariosBOTest {
 //
 //    }
 
-//    /**
-//     * Test of registrarUsuario method, of class UsuariosBO.
-//     */
+    /**
+     * Test of registrarUsuario method, of class UsuariosBO.
+     */
 //    @Test
 //    public void testRegistrarUsuarioOK() throws Exception {
+//        ManejadorConexiones.Inicializar();
 //        UsuariosBO usuarioBO = new UsuariosBO();
 //        UsuarioDTO usuario = new UsuarioDTO("Pedro Zamudio", 
 //                "Real del arco #208", 

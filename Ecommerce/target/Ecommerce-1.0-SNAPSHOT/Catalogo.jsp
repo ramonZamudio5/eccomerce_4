@@ -31,30 +31,7 @@
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody id="tablaProductos">
-<!--                        <tr>
-                               <td><strong>Smartphone X</strong></td> 
-                                <td>$899.00</td>
-                                <td class="celda-acciones">
-                                    <div class="contenedor-botones">
-                                        <a href="DetallesProducto.jsp" class="btn-estilo btn-detalles">Detalles</a>
-                                        <a href="Carrito.jsp" class="btn-estilo btn-carrito">Añadir al carrito</a>
-                                        <a href="CrearResenia.jsp" class="btn-estilo btn-resena">Reseña </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Laptop ZenBook 14</strong></td>
-                                <td>$1,150.00</td>
-                                <td class="celda-acciones">
-                                    <div class="contenedor-botones">
-                                        <a href="DetallesProducto.jsp" class="btn-estilo btn-detalles">Detalles</a>
-                                        <a href="Carrito.jsp?id=102" class="btn-estilo btn-carrito">Añadir al carrito</a>
-                                        <a href="CrearResenia.jsp" class="btn-estilo btn-resena">Reseña</a>
-                                    </div>
-                                </td>
-                            </tr>
-               --> 
+                        <tbody id="tablaProductos">                       
                         </tbody>
                         </table>
                 </div>

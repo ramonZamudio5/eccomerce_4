@@ -18,7 +18,7 @@ async function cargarProductos(){
                                         <div class="contenedor-botones">
                                             <a href="DetallesProducto.jsp?id=${p.id}" class="btn-estilo btn-detalles">Detalles</a>
                                             <a href="Carrito.jsp" class="btn-estilo btn-carrito">Añadir al carrito</a>
-                                            <a href="CrearResenia.jsp?id=${p.id}" class="btn-estilo btn-resena">Reseña </a>
+                                            <a href="crearResenia?idProducto=${p.id}" class="btn-estilo btn-resena">Reseña </a>
                                         </div>
                                     </td>
                                 </tr>
