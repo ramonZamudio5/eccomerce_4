@@ -62,34 +62,7 @@ public class ActualizarEstadoPedido extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String idPedidoStr = request.getParameter("idPedido");
         
-        if (idPedidoStr == null || idPedidoStr.isEmpty()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID de pedido faltante.");
-            return;
-        }
-        
-        try {
-            Long idPedido = Long.parseLong(idPedidoStr);
-
-            PedidoDTO pedido = pedidosBO.obtenerPedidoIndividual(idPedido);
-
-            if (pedido == null) {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Pedido no encontrado.");
-                return;
-            }
-            
-            request.setAttribute("pedidoIndividual", pedido);
-            
-            request.getRequestDispatcher("/administrarPedidoIndividual.jsp").forward(request, response);
-            
-        } catch (NumberFormatException ex) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID de pedido inválido.");
-        } catch (ObtenerPedidoException ex) {
-            request.setAttribute("error", "Error al cargar el pedido: " + ex.getMessage());
-            request.getRequestDispatcher("/error.jsp").forward(request, response);
-        }
-    
     }
 
     /**
@@ -103,32 +76,42 @@ public class ActualizarEstadoPedido extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String idPedidoStr = request.getParameter("idPedido"); // Debe ser un campo oculto en el formulario
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        String idPedidoStr = request.getParameter("idPedido");
         String estadoStr = request.getParameter("estado-pedido");
-
         try {
             if (idPedidoStr == null || estadoStr == null) {
-                throw new Exception("Datos faltantes en el formulario.");
+                out.print(
+                    "{"
+                    + "\"success\": false,"
+                    + "\"message\": \"Datos incompletos\""
+                    + "}"
+                );
+                return;
             }
-
             Long idPedido = Long.parseLong(idPedidoStr);
-
-            EstadoPedidoDTO nuevoEstado = EstadoPedidoDTO.valueOf(estadoStr);
-
-            pedidosBO.cambiarEstadoPedido(idPedido, nuevoEstado);
-
-            //NO SE SI LLAMA AL SERVLET O JSP??
-            response.sendRedirect(request.getContextPath() + "/cargarpedidos"); 
-
-        } catch (NumberFormatException ex) {
-            request.setAttribute("error", "ID o formato de estado inválido.");
-            request.getRequestDispatcher("/error.jsp").forward(request, response);
-        } catch (CambiarEstadoException ex) {
-            request.setAttribute("error", "Error al actualizar el estado: " + ex.getMessage());
-            request.getRequestDispatcher("/menuadministrador.jsp").forward(request, response); 
+            EstadoPedidoDTO nuevoEstado =
+                    EstadoPedidoDTO.valueOf(estadoStr);
+            pedidosBO.cambiarEstadoPedido(
+                    idPedido,
+                    nuevoEstado
+            );
+            out.print(
+                "{"
+                + "\"success\": true,"
+                + "\"message\": \"Estado actualizado correctamente\","
+                + "\"nuevoEstado\": \"" + estadoStr + "\""
+                + "}"
+            );
         } catch (Exception ex) {
-            request.setAttribute("error", "Error inesperado: " + ex.getMessage());
-            request.getRequestDispatcher("/error.jsp").forward(request, response);
+            out.print(
+                "{"
+                + "\"success\": false,"
+                + "\"message\": \"" + ex.getMessage() + "\""
+                + "}"
+            );
         }
     }
 
