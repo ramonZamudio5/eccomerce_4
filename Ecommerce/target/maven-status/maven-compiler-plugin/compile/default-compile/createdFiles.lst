@@ -13,6 +13,7 @@ servlets/AdministrarResenias.class
 servlets/CargarProducto.class
 servlets/EliminarResenia.class
 servlets/EditarPerfilServlet.class
+servlets/ConsultarPedidoServlet.class
 servlets/Register.class
 servlets/BorrarProducto.class
 util/JWTUtil.class
