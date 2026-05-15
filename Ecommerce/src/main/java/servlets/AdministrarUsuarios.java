@@ -61,18 +61,37 @@ public class AdministrarUsuarios extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+   @Override
+    protected void doGet(HttpServletRequest request,
+            HttpServletResponse response)
             throws ServletException, IOException {
-        try{
-            List<UsuarioDTO> listaUsuarios = usuariosBO.mostrarUsuarios();
-    
-            request.setAttribute("usuarios", listaUsuarios);
-
-            request.getRequestDispatcher("administrarUsuarios.jsp").forward(request, response);
-        }catch(AdministrarUsuarioException e){
-            request.setAttribute("mensaje", "Error: " + e.getMessage());
-            request.getRequestDispatcher("/error.jsp").forward(request, response);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        try {
+            List<UsuarioDTO> listaUsuarios =
+                    usuariosBO.mostrarUsuarios();
+            StringBuilder json = new StringBuilder();
+            json.append("[");
+            for (int i = 0; i < listaUsuarios.size(); i++) {
+                UsuarioDTO usuario = listaUsuarios.get(i);
+                json.append("{")
+                    .append("\"id\":").append(usuario.getId()).append(",")
+                    .append("\"nombre\":\"").append(usuario.getNombre()).append("\",")
+                    .append("\"correo\":\"").append(usuario.getCorreo()).append("\",")
+                    .append("\"esActivo\":")
+                    .append(usuario.getEsActivo())
+                    .append(",")
+                    .append("\"fechaRegistro\":\"")
+                    .append("\"")
+                    .append("}");
+                if (i < listaUsuarios.size() - 1) {
+                    json.append(",");
+                }
+            }
+            json.append("]");
+            response.getWriter().write(json.toString());
+        } catch (Exception e) {
+            response.getWriter().write("[]");
         }
     }
 
@@ -85,14 +104,15 @@ public class AdministrarUsuarios extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request,
+            HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         String accion = request.getParameter("accion");
         String idStr = request.getParameter("idUsuario");
-        
         try {
             Long id = Long.parseLong(idStr);
-            
             if ("activar".equals(accion)) {
                 usuariosBO.activarUsuario(id);
             } else if ("desactivar".equals(accion)) {
@@ -100,12 +120,19 @@ public class AdministrarUsuarios extends HttpServlet {
             } else if ("eliminar".equals(accion)) {
                 usuariosBO.eliminarUsuario(id);
             }
-            
-        } catch (AdministrarUsuarioException e) {
-            request.setAttribute("error", e.getMessage());
+            response.getWriter().write(
+                    "{"
+                    + "\"success\": true"
+                    + "}"
+            );
+        } catch (Exception e) {
+            response.getWriter().write(
+                    "{"
+                    + "\"success\": false,"
+                    + "\"message\": \"" + e.getMessage() + "\""
+                    + "}"
+            );
         }
-        response.sendRedirect("administrar-usuarios");
-    
     }
 
     /**

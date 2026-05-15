@@ -36,7 +36,6 @@ public class ReseniasDAO implements IReseniasDAO{
             query.executeUpdate();
             
             entityManager.getTransaction().commit();
-
         } catch(Exception e) {
             if (entityManager.getTransaction().isActive()) { 
             entityManager.getTransaction().rollback();
@@ -73,7 +72,6 @@ public class ReseniasDAO implements IReseniasDAO{
     @Override
     public Reseña agregarResenia(ReseñaDTO nuevaResenia) throws PersistenciaException {
         EntityManager em = ManejadorConexiones.getEntityManager();
-
         try {
             em.getTransaction().begin();
 

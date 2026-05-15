@@ -30,37 +30,17 @@
                             <th>Nombre</th>
                             <th>Correo</th>
                             <th>Estado</th>
-                            <th>Registro</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Fernando</td>
-                            <td>fer@gmail.com</td>
-                            <td style="color: green;">Activo</td>
-                            <td>17/02/2026</td>
-                            <td class="contenedor-botones">
-                                <button class="btn-estilo btn-azul-admin">Estado</button>
-                                <button class="btn-estilo btn-rojo-admin">Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Jesus</td>
-                            <td>Jesus17@gmail.com</td>
-                            <td style="color: red;">Inactivo</td>
-                            <td>01/03/2026</td>
-                            <td class="contenedor-botones">
-                                <button class="btn-estilo btn-azul-admin">Estado</button>
-                                <button class="btn-estilo btn-rojo-admin">Eliminar</button>
-                            </td>
-                        </tr>
+                    <tbody id="tablaUsuariosBody">
                     </tbody>
                 </table>
             </div>
         </main>
     </div>
     <%@include  file="/WEB-INF/fragmentos/footer.jspf"%>
+    <script src="${pageContext.request.contextPath}/scripts/AdminUsuarios.js"></script>
 </body>
 
 </html>
