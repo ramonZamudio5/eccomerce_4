@@ -7,6 +7,7 @@ package implementaciones;
 import entidades.Carrito;
 import entidades.DetallesCarrito;
 import entidades.Producto;
+import entidades.Usuario;
 import exception.PersistenciaException;
 import interfaces.ICarritosDAO;
 import java.util.List;
@@ -53,7 +54,20 @@ public class CarritosDAO implements ICarritosDAO {
             List<Carrito> resultados = query.getResultList();
 
             if (resultados.isEmpty()) {
-                return null; 
+                // se creq un nuevo carrito para el usuario
+                // deberia de ponerlo cuando se registre un usuario?
+                //crear un metodo llamado crearCarrito(Long idUsuario)
+                Usuario us = em.find(Usuario.class, idUsuario);
+                Carrito nuevoCarrito = new Carrito();
+                nuevoCarrito.setUsuario(us);
+                nuevoCarrito.setTotal(0.0);
+                em.getTransaction().begin();
+                em.persist(nuevoCarrito);
+                em.getTransaction().commit();
+                
+                return nuevoCarrito;
+                
+//                return null; 
             }
             
             return resultados.get(0);

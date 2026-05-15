@@ -108,7 +108,7 @@ public class FiltroAutorización implements Filter {
         String path = this.getPathSolicitado(peticion);
 
         String uri = peticion.getRequestURI();
-
+        
         if (uri.endsWith(".css") || uri.endsWith(".js") || uri.endsWith(".png")
                 || uri.endsWith(".jpg") || uri.contains("/imgs/")) {
             fc.doFilter(sr, sr1);
@@ -129,6 +129,7 @@ public class FiltroAutorización implements Filter {
             sr.getRequestDispatcher("/Index.jsp").forward(sr, sr1);
             return;
         }
+        System.out.println("Pasando por FiltroAutorización: " + path + " | ID en request: " + sr.getAttribute("idUsuario"));
 
         fc.doFilter(sr, sr1);
     }

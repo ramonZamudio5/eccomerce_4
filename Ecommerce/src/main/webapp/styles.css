@@ -286,6 +286,10 @@ footer {
     align-items: center;
     flex-wrap: wrap; /* Permitir que los botones bajen si no caben */
 }
+.contenedor-botones button{
+    cursor: pointer;
+    
+}
 
 .btn-estilo {
     text-decoration: none;  

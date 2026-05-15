@@ -45,7 +45,7 @@
                         <div class="item-precio-box">
                             <p class="precio-grande">$4,953.00</p>
                             <p class="impuesto-texto">Aplica impuesto*</p>
-                        </div>
+                    </div>
                     </div>
 
                     <hr class="divisor-carrito">

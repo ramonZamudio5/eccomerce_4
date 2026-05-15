@@ -15,15 +15,16 @@ public class JWTUtil {
     private static final Key KEY =
             Keys.hmacShaKeyFor(SECRET.getBytes());
 
-    public static String generarToken(String correo, String rol){
+    public static String generarToken(String correo, String rol, Long idUsuario){
 
         return Jwts.builder()
-                .setSubject(correo)
+                .claim("idUsuario", idUsuario)
                 .claim("rol", rol)
+                .setSubject(correo)                 
                 .setIssuedAt(new Date())
                 .setExpiration(
                         new Date(System.currentTimeMillis() + 86400000)
-                )
+                )               
                 .signWith(KEY, SignatureAlgorithm.HS256)
                 .compact();
     }

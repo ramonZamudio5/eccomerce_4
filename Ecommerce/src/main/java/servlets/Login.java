@@ -80,9 +80,10 @@ public class Login extends HttpServlet {
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-
+        
         String correo = request.getParameter("correo");
         String contrasenia = request.getParameter("contrasenia");
+        
         try {
             UsuarioDTO usuario =
                     usuariosBO.iniciarSesion(correo, contrasenia);
@@ -99,10 +100,12 @@ public class Login extends HttpServlet {
 
             session.setAttribute("usuarioActual", usuario);
             session.setAttribute("rol", usuario.getRol().name());
-
+            
+            
             String token = JWTUtil.generarToken(
                 usuario.getCorreo(),
-                usuario.getRol().name()
+                usuario.getRol().name(),
+                usuario.getId()
             );
 
             String destino = "";

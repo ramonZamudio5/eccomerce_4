@@ -4,11 +4,16 @@
  */
 package servlets;
 
+import bos.CarritosBO;
 import bos.ProductoBO;
 import com.google.gson.Gson;
 import dtos.ProductoDTO;
+import exception.CarritoException;
 import exception.ObtenerProductosException;
+import interfaces.ICarritosBO;
 import interfaces.IProductosBO;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,6 +22,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import util.JWTUtil;
 
 /**
  *
@@ -26,6 +32,7 @@ import java.util.List;
 public class CargarProducto extends HttpServlet {
 
     IProductosBO productosBO = new ProductoBO();
+    ICarritosBO carritoBO = new CarritosBO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -106,7 +113,39 @@ public class CargarProducto extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //Metodo para agregar producto al carrito de compras
+        try{
+            //Sacamos el id del usuario a la fuerza del token
+            //hay muchos problemas con los 2 filtros y quedaba sin acceso a muchas paginas
+            String authHeader = request.getHeader("Authorization");
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            response.setStatus(401);
+            return;
+        }
+        String token = authHeader.substring(7);
 
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(JWTUtil.getSecretKey())
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        
+            Long idUsuario = Long.valueOf(claims.get("idUsuario").toString());
+            System.out.println("ID de usuario que llega a servlet: " + idUsuario);
+            Long idProducto =  Long.parseLong(request.getParameter("id"));
+            int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+
+            carritoBO.agregarProducto(idUsuario, idProducto, cantidad);
+            response.setStatus(HttpServletResponse.SC_OK);
+            
+        }catch (NumberFormatException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("Error: El ID o la cantidad no son números validos.");
+        }    
+        catch(CarritoException e){
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().write("Error : " + e.getMessage());
+        }
     }
 
     /**

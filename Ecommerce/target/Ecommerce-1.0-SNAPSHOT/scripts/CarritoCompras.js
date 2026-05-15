@@ -17,7 +17,7 @@ async function cargarProductos(){
                                     <td class="celda-acciones">
                                         <div class="contenedor-botones">
                                             <a href="DetallesProducto.jsp?id=${p.id}" class="btn-estilo btn-detalles">Detalles</a>
-                                            <a href="Carrito.jsp" class="btn-estilo btn-carrito">Añadir al carrito</a>
+                                            <button onclick="agregarProductoAlCarrito(${p.id})" class="btn-estilo btn-carrito">Añadir al carrito</button>
                                             <a href="crearResenia?idProducto=${p.id}" class="btn-estilo btn-resena">Reseña </a>
                                         </div>
                                     </td>
@@ -63,10 +63,48 @@ async function resenhaProducto(){
         console.error("Error al obtener detalles del producto", error);
     }
 }
+async function agregarProductoAlCarrito(idProducto){
+    if (!idProducto || idProducto === "undefined") {
+        alert("Error: No se pudo identificar el producto.");
+        return;
+    }
+    
+    console.log("¡Botón presionado para el producto ID:", idProducto);
+    
+    const cantidad = document.getElementById("cantidad")?.value || 1;
+    const token = localStorage.getItem("token");
+    if(!token){
+        alert("Debes iniciar sesion para agregar productos al carrito");
+        window.location.href = "login.jsp";
+        return;
+    }
+    
+    try{
+        const respuesta = await fetch("cargarproducto", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Authorization": `Bearer ${token}`
+            },
+            body: `accion=agregar&id=${idProducto}&cantidad=${cantidad}`
+        });
+        if(respuesta.ok){
+            alert("Producto agregado al carrito con exito");
+        }
+       
+    }catch(error){
+        console.error("Error al agregar el producto al carrito");
+    }
+}
+
+async function cargarProductosCarritos(){
+    
+}
 
 
 document.addEventListener("DOMContentLoaded", () => {
     cargarProductos();
     detallesProducto();
     resenhaProducto();
+  
 });

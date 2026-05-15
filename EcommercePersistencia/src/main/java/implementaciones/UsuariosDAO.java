@@ -86,7 +86,7 @@ public class UsuariosDAO implements IUsuariosDAO {
             usuarioNuevo.setContrasenia(encriptarContrasenia(usuarioNuevo.getContrasenia()));
             entityManager.persist(usuarioNuevo);
             entityManager.getTransaction().commit();
-
+            
             return usuarioNuevo;
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {

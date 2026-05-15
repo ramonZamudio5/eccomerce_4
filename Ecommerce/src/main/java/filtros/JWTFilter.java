@@ -30,7 +30,7 @@ public class JWTFilter implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-
+        
         String authorization =
                 req.getHeader("Authorization");
 
@@ -63,13 +63,22 @@ public class JWTFilter implements Filter {
                     .getBody();
 
             String correo = claims.getSubject();
-
+            
+            Object idObj = claims.get("idUsuario");
+            if (idObj != null) {
+                Long idUsuario = Long.valueOf(idObj.toString());
+                System.out.println("Id usuario en FILTRO: " + idUsuario); // parece que nunca pasa por aqui
+                req.setAttribute("idUsuario", idUsuario);
+            }
+            
             String rol =
                     claims.get("rol", String.class);
 
             req.setAttribute("correo", correo);
 
             req.setAttribute("rol", rol);
+            
+//            req.setAttribute("idUsuario", idUsuario);
 
             chain.doFilter(request, response);
 
